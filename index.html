@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>비바! 청춘 문화제 인형뽑기</title>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+      text-align: center;
+      padding: 60px;
+    }
+.logo-wrap {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.logo-wrap a {
+  display: inline-block;
+}
+.logo-wrap img {
+  max-width: 350px;   /* 로고 최대 크기 */
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+.description-text {
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.7;
+  font-weight: 400;
+  color: #8D7860;
+  white-space: pre-line;
+}
+    
+
+    h2 {
+      color: #8D7860;
+    }
+
+    button {
+      padding: 14px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 15px;
+      color: #fff;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    .btn-fish {
+      background: #2BBFEF;
+    }
+    
+    .btn-gather {
+      background: #C69B60;
+    }
+
+/* 비활성화 상태 */
+button:disabled {
+  background: #FA8B60;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+.random-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.random-box {
+  width: 100%;
+  max-width: 420px;
+}
+
+    .result {
+      margin-top: 25px;
+    }
+
+    .image-box {
+      width: 100%;
+      height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-top: 10px;
+      margin-bottom: 16px;
+    }
+
+    .image-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+    .result-text {
+      margin-top: 12px;
+      font-size: 20px;
+      font-weight: 600;
+      color: #8D7860;
+      margin-top: 8px; 
+    }
+
+    footer {
+      margin-top: 100px;
+      font-size: 12px;
+      color: #8D7860;
+    }
+
+    @keyframes pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pop {
+  animation: pop 0.35s ease-out;
+}
+  </style>
+</head>
+
+<body>
+  <div class="logo-wrap">
+  <a href="">
+    <img src="logo.png" alt="로고">
+  </a>
+</div>
+
+  <div class="random-wrap">
+
+    <div class="random-box">
+      <h2>🧸랜덤 인형 낚시</h2>
+      <button class="btn-fish" onclick="pickRandom(itemsA, 'imageA', 'textA')">
+        낚시하기
+      </button>
+      <div class="result">
+        <div class="image-box">
+          <img id="imageA" src="">
+        </div>
+        <div id="textA" class="result-text"></div>
+        <div id="descriptionA" class="description-text"></div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    © 비바! 청춘
+  </footer>
+
+  <script>
+      const lastIndexMap = {};
+  let remainingClicks = 3;
+
+  function pickRandom(items, imageId, textId) {
+    if (remainingClicks <= 0) return;
+
+    let i;
+    do {
+      i = Math.floor(Math.random() * items.length);
+    } while (lastIndexMap[imageId] === i && items.length > 1);
+
+    lastIndexMap[imageId] = i;
+
+    const imgEl = document.getElementById(imageId);
+    const textEl = document.getElementById(textId);
+
+    imgEl.src = items[i].img;
+    textEl.innerText = items[i].text;
+    document.getElementById("descriptionA").innerText =
+  items[i].description || "";
+
+    playAnimation(imgEl, textEl);
+
+    remainingClicks--;
+    updateButtons();
+  }
+
+  function updateButtons() {
+    if (remainingClicks <= 0) {
+      document.querySelectorAll("button").forEach(btn => {
+        btn.disabled = true;
+        btn.innerText = "오늘은 여기까지!";
+      });
+    }
+  }
+ function playAnimation(imgEl, textEl) {
+    imgEl.classList.remove("pop");
+    textEl.classList.remove("pop");
+
+    void imgEl.offsetWidth; // 애니메이션 리셋용
+
+    imgEl.classList.add("pop");
+    textEl.classList.add("pop");
+  }
+    const itemsA = [
+      {
+        img: "1.png",
+        text: "토끼 인형을 낚았다!",
+        description: "보상으로 칭찬 스티커 1장이 나왔다!"
+      },
+      {
+        img: "2.png",
+        text: "곰인형을 낚았다!",
+        description: "보상으로 칭찬 스티커 3장이 나왔다!"
+      },
+      {
+        img: "3.png",
+        text: "귤 인형을 낚았다!",
+        description: "보상으로 귤 하나를 받았다!"
+      },
+      {
+        img: "4.png",
+        text: "강아지 인형을 낚았다!",
+        description: "보상으로 어디선가 강아지가 나타나 5분간 핥아주고 갔다!"
+      },
+      {
+        img: "5.png",
+        text: "눈사람 인형을 낚았다!",
+        description: "꽝. 아쉽네요!"
+      },
+      {
+        img: "6.png",
+        text: "연어를 문 곰 목각 조각을 낚았다!",
+        description: "보상으로 연어필렛 한조각을 받았다!"
+      },
+      {
+        img: "7.png",
+        text: "산타 원숭이 인형을 낚았다!",
+        description: "보상으로 랜덤 선물을 하나 받았다! *본 화면 캡쳐 후 [질의응답] 게시판으로 와주세요."
+      },
+      {
+        img: "8.png",
+        text: "고양이 열쇠고리를 낚았다!",
+        description: "보상으로 멸치 한마리를 받았다!"
+      },
+      {
+        img: "9.png",
+        text: "토끼 아크릴 키링을 낚았다!",
+        description: "보상으로 당근 스틱 & 샐러리 세트를 받았다!"
+      },
+      {
+        img: "10.png",
+        text: "로보트 키링을 낚았다!",
+        description: "갑자기 뒤에서 누가 쳐서 물에 빠졌다! 꽝!"
+      }
+      
+
+    ];
+
+  
+  </script>
+
+</body>
+</html>
