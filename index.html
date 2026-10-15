@@ -144,9 +144,9 @@ button:disabled {
   <div class="random-wrap">
 
     <div class="random-box">
-      <h2>🧸랜덤 인형 낚시</h2>
+      <h2>🍀오늘의 운세뽑기</h2>
       <button class="btn-fish" onclick="pickRandom(itemsA, 'imageA', 'textA')">
-        낚시하기
+        운세뽑기
       </button>
       <div class="result">
         <div class="image-box">
@@ -166,7 +166,7 @@ button:disabled {
 
   <script>
       const lastIndexMap = {};
-  let remainingClicks = 3;
+  let remainingClicks = 1;
 
   function pickRandom(items, imageId, textId) {
     if (remainingClicks <= 0) return;
@@ -196,7 +196,7 @@ button:disabled {
     if (remainingClicks <= 0) {
       document.querySelectorAll("button").forEach(btn => {
         btn.disabled = true;
-        btn.innerText = "오늘은 여기까지!";
+        btn.innerText = "운세는 한번만!";
       });
     }
   }
@@ -211,54 +211,46 @@ button:disabled {
   }
     const itemsA = [
       {
-        img: "1.png",
-        text: "토끼 인형을 낚았다!",
-        description: "보상으로 칭찬 스티커 1장이 나왔다!"
+        img: "대길.png",
+        text: "운세: 대길",
+        description: "*이 운세가 나왔다면 본 화면 캡쳐 후 [질의응답] 게시판으로 와주세요."
       },
       {
-        img: "2.png",
-        text: "곰인형을 낚았다!",
-        description: "보상으로 칭찬 스티커 3장이 나왔다!"
+        img: "중길.png",
+        text: "운세: 중길"
       },
       {
-        img: "3.png",
-        text: "귤 인형을 낚았다!",
-        description: "보상으로 귤 하나를 받았다!"
+        img: "소길.png",
+        text: "운세: 소길"
       },
       {
-        img: "4.png",
-        text: "강아지 인형을 낚았다!",
-        description: "보상으로 어디선가 강아지가 나타나 5분간 핥아주고 갔다!"
+        img: "길.png",
+        text: "운세: 길"
       },
       {
-        img: "5.png",
-        text: "눈사람 인형을 낚았다!",
-        description: "꽝. 아쉽네요!"
+        img: "평.png",
+        text: "운세: 평"
       },
       {
-        img: "6.png",
-        text: "연어를 문 곰 목각 조각을 낚았다!",
-        description: "보상으로 연어필렛 한조각을 받았다!"
+        img: "길흉미분.png",
+        text: "운세: 길흉미분"
       },
       {
-        img: "7.png",
-        text: "산타 원숭이 인형을 낚았다!",
-        description: "보상으로 랜덤 선물을 하나 받았다! *본 화면 캡쳐 후 [질의응답] 게시판으로 와주세요."
+        img: "흉.png",
+        text: "운세: 흉"
       },
       {
-        img: "8.png",
-        text: "고양이 열쇠고리를 낚았다!",
-        description: "보상으로 멸치 한마리를 받았다!"
+        img: "대흉.png",
+        text: "운세: 대흉",
+        description: "*이 운세가 나왔다면 본 화면 캡쳐 후 [질의응답] 게시판으로 와주세요."
       },
       {
-        img: "9.png",
-        text: "토끼 아크릴 키링을 낚았다!",
-        description: "보상으로 당근 스틱 & 샐러리 세트를 받았다!"
+        img: "길.png",
+        text: "운세: 길"
       },
       {
-        img: "10.png",
-        text: "로보트 키링을 낚았다!",
-        description: "갑자기 뒤에서 누가 쳐서 물에 빠졌다! 꽝!"
+        img: "평.png",
+        text: "운세: 평"
       }
       
 
